@@ -45,13 +45,21 @@ router.get('/', (req, res) => {
     .then(foundBooks => {
         res.json(foundBooks)
     })
+    .catch(err => {
+        console.log('err', err)
+        res.status(404)
+    })
 })
 
 //Show
 router.get('/:id', (req, res) => {
-    Book.findOne({ id: req.params.id })
+    Book.findById(req.params.id)
         .then(foundBook => {
             res.json(foundBook)
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.status(404)
         })
 })
 
