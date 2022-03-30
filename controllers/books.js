@@ -39,11 +39,20 @@ router.get('/seed', (req, res) => {
         }))
 })
 
+//Index
 router.get('/', (req, res) => {
     Book.find()
     .then(foundBooks => {
         res.json(foundBooks)
     })
+})
+
+//Show
+router.get('/:id', (req, res) => {
+    Book.findOne({ id: req.params.id })
+        .then(foundBook => {
+            res.json(foundBook)
+        })
 })
 
 
