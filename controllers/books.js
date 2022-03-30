@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
         console.log('err', err)
-        res.status(404)
+        res.sendStatus(404)
     })
 })
 
@@ -59,7 +59,7 @@ router.get('/:id', (req, res) => {
         })
         .catch(err => {
             console.log('err', err)
-            res.status(404)
+            res.sendStatus(404)
         })
 })
 
