@@ -67,9 +67,9 @@ router.get('/:id', (req, res) => {
 
 //Create
 router.post('/', (req, res) => {
-    db.Books.create(req.body)
-    .then(() => {
-        res.json(foundBooks)
+    Book.create(req.body)
+    .then(newBook => {
+        res.json(newBook)
     })
     .catch(err => {
         console.log('err', err)
@@ -77,7 +77,7 @@ router.post('/', (req, res) => {
     })
 })
 
-//delete
+//Delete
 router.delete('/:id', (req, res) => {
     Book.findByIdAndDelete({_id: req.params.id})
     .then(deletedBook => {
@@ -85,5 +85,13 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+//Update (put)
+router.put('/:id' , (req, res) => {
+   Book.findByIdAndUpdate(req.params.id, req.body)
+    .then(updateBook => {
+        console.log(updateBook)
+        res.json(updateBook)
+    })
+})
 
 module.exports = router
