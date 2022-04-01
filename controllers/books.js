@@ -1,4 +1,6 @@
 const router = require('express').Router()
+const mongodb = require('mongodb')
+const { db } = require('../models/book_model.js')
 const Book = require('../models/book_model.js')
 
 //Seed Data
@@ -61,6 +63,26 @@ router.get('/:id', (req, res) => {
             console.log('err', err)
             res.sendStatus(404)
         })
+})
+
+//Create
+router.post('/', (req, res) => {
+    db.Books.create(req.body)
+    .then(() => {
+        res.json(foundBooks)
+    })
+    .catch(err => {
+        console.log('err', err)
+        res.sendStatus(404)
+    })
+})
+
+//delete
+router.delete('/:id', (req, res) => {
+    Book.findByIdAndDelete({_id: req.params.id})
+    .then(deletedBook => {
+        res.json(deletedBook)
+    })
 })
 
 
